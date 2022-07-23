@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteSingleAuthor } from '../api/authorData';
+// import { deleteSingleAuthor } from '../api/authorData';
+import { deleteAuthorBooks } from '../api/mergedData';
 
 function AuthorCard({ authorObj, onUpdate }) {
   // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
   // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
   const deleteThisAuthor = () => {
     if (window.confirm(`Delete ${authorObj.firebaseKey}?`)) {
-      deleteSingleAuthor(authorObj.firebaseKey).then(() => onUpdate());
+      deleteAuthorBooks(authorObj.firebaseKey).then(() => onUpdate);
+      // deleteSingleAuthor(authorObj.firebaseKey).then(() => onUpdate());
     }
   };
 
@@ -19,9 +21,9 @@ function AuthorCard({ authorObj, onUpdate }) {
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Body>
         <Card.Title>
-          {authorObj.firstName}
-          {authorObj.lastName}
+          {authorObj.first_name} {authorObj.last_name}
         </Card.Title>
+        <p>{authorObj.email}</p>
         {/* DYNAMIC LINK TO VIEW THE author DETAILS  */}
         <Link href={`/author/${authorObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">
@@ -42,8 +44,8 @@ function AuthorCard({ authorObj, onUpdate }) {
 
 AuthorCard.propTypes = {
   authorObj: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
     firebaseKey: PropTypes.string,
     email: PropTypes.string,
     favorite: PropTypes.bool,

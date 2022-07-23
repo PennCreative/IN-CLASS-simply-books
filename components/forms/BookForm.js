@@ -68,6 +68,7 @@ function BookForm({ obj }) {
           name="author_id"
           onChange={handleChange}
           className="mb-3"
+          defaultValue=""
           required
         >
           <option value="">Select an Author</option>

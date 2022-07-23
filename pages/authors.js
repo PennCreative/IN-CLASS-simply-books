@@ -9,9 +9,13 @@ export default function Authors() {
   const [authors, setAuthors] = useState([]);
   const { user } = useAuth();
 
-  useEffect(() => {
+  const getAllAuthors = () => {
     getAuthors(user.uid).then(setAuthors);
-  }, [user.uid]);
+  };
+
+  useEffect(() => {
+    getAllAuthors();
+  }, []);
 
   return (
     <div className="text-center my-4">
@@ -21,7 +25,7 @@ export default function Authors() {
       <div className="d-flex flex-wrap">
         {/* TODO: map over authors here using AuthorCard component */}
         {authors.map((author) => (
-          <AuthorCards key={author.firebaseKey} authorObj={author} onUpdate={getAuthors} />
+          <AuthorCards key={author.firebaseKey} authorObj={author} onUpdate={getAllAuthors} />
         ))}
       </div>
 

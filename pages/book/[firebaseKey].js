@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { viewBookDetails } from '../../api/mergedData';
 
@@ -22,10 +24,11 @@ export default function ViewBook() {
       </div>
       <div className="text-white ms-5 details">
         <h5>
-          {bookDetails.title} by {bookDetails.authorObject?.first_name} {bookDetails.authorObject?.last_name}
-          {bookDetails.authorObject?.favorite ? ' 🤍' : ''}
+          {bookDetails.title} by
         </h5>
+        <h6>{bookDetails.authorObject?.first_name} {bookDetails.authorObject?.last_name}</h6>
         Author Email: <a href={`mailto:${bookDetails.authorObject?.email}`}>{bookDetails.authorObject?.email}</a>
+        <h5>{bookDetails.authorObject?.favorite ? ' 🤍' : ''}</h5>
         <p>{bookDetails.description || ''}</p>
         <hr />
         <p>
@@ -33,6 +36,9 @@ export default function ViewBook() {
             ? `🏷️ Sale $${bookDetails.price}`
             : `$${bookDetails.price}`}
         </p>
+        <Link href={`/author/${bookDetails.authorObject?.firebaseKey}`} passHref>
+          <Button variant="info" className="m-2">Checkout Author</Button>
+        </Link>
       </div>
     </div>
   );
