@@ -6,7 +6,7 @@ import BookForm from '../../../components/forms/BookForm';
 export default function EditBook() {
   const [editItem, setEditItem] = useState({});
   const router = useRouter();
-  // TODO: grab the firebasekey
+  // TODO: grab the firebaseKey
   const { firebaseKey } = router.query;
 
   // TODO: make a call to the API to get the book data

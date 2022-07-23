@@ -1,18 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 
 export default function User({
   name, email, image, lastLogin,
 }) {
   return (
-    <>
-      <div>User</div>
-      <div>Name: {name}</div>
-      <div>Email: {email}</div>
-      <div>Image: <img src={image} alt={name} /></div>
-      <div>LastLogin: {lastLogin}</div>
-    </>
+    <Card style={{ width: '14rem', margin: '10px', color: 'black ' }}>
+      <Card.Img variant="top" src={image} alt={image} style={{ height: '8rem', width: '8rem', justify: 'center' }} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <p className="card-text bold">{email}</p>
+        <p className="card-text bold">{lastLogin}</p>
+      </Card.Body>
+    </Card>
+
   );
 }
 User.propTypes = {
@@ -20,10 +23,4 @@ User.propTypes = {
   email: PropTypes.string,
   image: PropTypes.string,
   lastLogin: PropTypes.string,
-};
-User.defaultProps = {
-  name: 'Michael Pennington',
-  email: 'mp@gmail.com',
-  image: 'https://media1.popsugar-assets.com/files/thumbor/ZMeA-8jNDh0S_WyN9zevUfZ9fSo/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/07/19/892/n/1922398/1873e28627848827_GettyImages-666298342/i/Kristofer-Hivju-Tormund-Giantsbane.jpg',
-  lastLogin: '2/19/1990 12:00:00',
-};
+}.isRequired;
